@@ -157,3 +157,6 @@ cython_debug/
 
 # Ruff linter
 .ruff_cache/
+
+# Log config
+log.yml
