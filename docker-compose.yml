@@ -1,0 +1,27 @@
+version: "3.9"
+
+x-environment-vars: &environment-vars
+  SERVER__ADDRESS: localhost
+  SERVER__PORT: 5000
+
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+    command: python -m src
+    environment:
+      <<: *environment-vars
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+  db:
+    image: postgres:14.1-alpine
+    environment:
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
